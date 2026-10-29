@@ -1,0 +1,8 @@
+<form class="like-controls" action="{% url 'books:like' book.pk %}" method="post" data-like-form data-book-id="{{ book.pk }}">
+  {% csrf_token %}
+  <button class="btn like-button{% if book.is_liked %} is-liked{% endif %}" type="submit" name="liked" value="{% if book.is_liked %}false{% else %}true{% endif %}" aria-pressed="{% if book.is_liked %}true{% else %}false{% endif %}" aria-label="{{ book.title }} 좋아요">
+    <span data-like-icon aria-hidden="true">{% if book.is_liked %}♥{% else %}♡{% endif %}</span>
+    <span data-like-label>{% if book.is_liked %}좋아요 취소{% else %}좋아요{% endif %}</span>
+  </button>
+  <span class="like-status" data-like-status role="status" aria-live="polite"></span>
+</form>

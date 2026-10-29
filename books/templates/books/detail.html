@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'books:index' %}">← 도서 목록으로</a>
+<article class="row g-5 mt-1 detail-layout">
+  <div class="col-md-4"><div class="book-visual detail-cover tone-sage"><div class="cover-spine"></div><span class="cover-label">BOOK COLLECTION</span><h2>{{ book.title }}</h2><span class="cover-author">{{ book.author }}</span><span class="cover-mark" aria-hidden="true">✳</span></div></div>
+  <div class="col-md-8">
+    <p class="eyebrow">A STORY TO SHARE</p>
+    <h1 class="detail-title">{{ book.title }}</h1>
+    <p class="detail-author">{{ book.author }} <span>지음</span></p>
+    <dl class="d-flex align-items-center flex-wrap gap-2 mb-3">
+      <dt class="small text-secondary fw-normal">카테고리</dt>
+      <dd class="mb-0"><a class="book-category mb-0" href="{% url 'books:category' book.category_id %}">{{ book.category.name }}</a></dd>
+    </dl>
+    <div class="detail-rating"><span aria-hidden="true">★</span><strong>{{ book.customer_review_rank }}</strong><span class="text-secondary">/ 10 · 회원 리뷰 평점</span></div>
+    <hr class="my-4">
+    <h2 class="fs-5 fw-bold mb-3">책 소개</h2>
+    <div class="book-full-description">{{ book.description|linebreaks }}</div>
+    {% if request.user.is_authenticated %}<div class="mt-4">{% include 'books/includes/like_button.html' %}</div><div class="d-flex flex-wrap gap-2 mt-4"><a class="btn btn-primary" href="{% url 'books:update' book.pk %}">도서 수정</a><button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteBookModal">도서 삭제</button></div>{% else %}<div class="reading-note mt-5">도서 정보를 함께 가꾸고 싶으신가요? <a href="{% url 'accounts:login' %}?next={{ request.path|urlencode }}">로그인</a>하고 참여해 보세요.</div>{% endif %}
+  </div>
+</article>
+{% if request.user.is_authenticated %}
+<div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="deleteBookTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5" id="deleteBookTitle">도서를 삭제할까요?</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="닫기"></button></div><div class="modal-body">‘{{ book.title }}’ 도서 정보가 삭제됩니다.</div><div class="modal-footer"><button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">취소</button><form method="post" action="{% url 'books:delete' book.pk %}">{% csrf_token %}<button class="btn btn-danger" type="submit">삭제하기</button></form></div></div></div></div>
+{% endif %}
+{% endblock %}

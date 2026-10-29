@@ -1,0 +1,25 @@
+.content-layout { display: grid; grid-template-columns: minmax(0, 1fr) 220px; align-items: start; gap: 28px; }
+.page-body { min-width: 0; }
+.category-sidebar { position: sticky; top: 24px; padding: 24px 18px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.category-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 12px; border-radius: 7px; text-decoration: none; color: #647366; font-size: .85rem; overflow-wrap: anywhere; }
+.category-link:hover { background: #f3f6ef; color: var(--green); }
+.category-link.is-active { background: #eaf2e4; color: var(--green); font-weight: 700; }
+.category-count { font-size: .72rem; color: #6e856e; background: #f1f4ed; padding: 2px 7px; border-radius: 10px; }
+.sidebar-note { border-top: 1px solid var(--line); padding-top: 17px; margin-top: 18px; font-size: .75rem; }
+.sidebar-note a { text-decoration: none; }
+.book-category { display: inline-block; font-size: .72rem; padding: 4px 8px; margin-bottom: 10px; border-radius: 5px; background: #eef3e8; color: var(--green); text-decoration: none; }
+.category-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.category-tags .book-category { margin: 0; }
+.genre-option { max-width: 100%; }
+.genre-option span { min-width: 0; overflow-wrap: anywhere; }
+.content-layout .hero { padding: 36px 28px; }
+.content-layout .hero-art { width: 260px; transform: scale(.7); transform-origin: right center; margin-left: -80px; }
+.content-layout .hero h1 { font-size: 2.2rem; }
+.content-layout .detail-title { font-size: 1.8rem; }
+.content-layout .detail-cover { height: 340px; padding: 30px 22px 25px 30px; }
+.content-layout .detail-cover h2 { font-size: 1.8rem; }
+.content-layout .profile-list { grid-template-columns: 70px minmax(0, 1fr); gap: 18px 8px; }
+#interest-categories { scroll-margin-top: 24px; }
+@media (max-width: 1199px) { .content-layout .hero-art { display: none; } .content-layout .search-form { width: 100%; } }
+@media (max-width: 991px) { .content-layout { grid-template-columns: minmax(0, 1fr) 190px; gap: 20px; } .category-sidebar { padding: 20px 12px; } }
+@media (max-width: 767px) { .content-layout { display: flex; flex-direction: column; gap: 24px; } .page-body { width: 100%; } .category-sidebar { position: static; order: -1; width: 100%; padding: 18px; } .category-sidebar nav { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 5px; } .category-link { flex-shrink: 0; white-space: nowrap; padding: 8px 10px; } .sidebar-note { margin-top: 9px; padding-top: 10px; } .content-layout .hero h1 { font-size: 2rem; } }

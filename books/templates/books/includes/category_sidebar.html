@@ -1,0 +1,11 @@
+<aside class="category-sidebar" aria-labelledby="category-heading">
+  <p class="eyebrow mb-2">FIND YOUR NEXT BOOK</p>
+  <h2 class="fs-5 fw-bold mb-3" id="category-heading">카테고리</h2>
+  <nav aria-label="도서 카테고리">
+    <a class="category-link{% if not selected_category %} is-active{% endif %}" href="{% url 'books:index' %}{{ category_filter_query }}"{% if not selected_category %} aria-current="page"{% endif %}><span>전체 도서</span><span class="category-count">{{ category_book_total }}</span></a>
+    {% for category in sidebar_categories %}
+      <a class="category-link{% if selected_category.pk == category.pk %} is-active{% endif %}" href="{% url 'books:category' category.pk %}{{ category_filter_query }}"{% if selected_category.pk == category.pk %} aria-current="page"{% endif %}><span>{{ category.name }}</span><span class="category-count">{{ category.book_count }}</span></a>
+    {% empty %}<p class="small text-secondary">등록된 카테고리가 없습니다.</p>{% endfor %}
+  </nav>
+  {% if request.user.is_authenticated %}<div class="sidebar-note"><a href="{% url 'accounts:profile' request.user.username %}#interest-categories">내 관심 카테고리 설정 →</a></div>{% endif %}
+</aside>

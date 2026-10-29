@@ -1,0 +1,8 @@
+.recommendation-section { padding-top: 30px; border-top: 1px solid var(--line); }
+.recommendation-status { min-height: 1.5em; font-size: .84rem; color: #61725f; }
+.recommendation-status.is-error { color: #a13e54; }
+.recommendation-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 24px; overflow-wrap: anywhere; }
+.recommendation-description { font-size: .85rem; line-height: 1.9; color: #677563; }
+.recommendation-reason { background: #f2f5ee; border-radius: 7px; padding: 15px; font-size: .8rem; line-height: 1.9; color: #52694f; }
+.recommendation-section button { min-width: 145px; }
+.recommendation-card [hidden] { display: none; }

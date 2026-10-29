@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}도서 수정{% endblock %}
+{% block content %}
+<div class="form-page"><a class="back-link" href="{% url 'books:detail' book.pk %}">← 도서 상세</a><p class="eyebrow mt-4">EDIT BOOK</p><h1 class="page-title">도서 정보 수정</h1><p class="page-description">책의 이야기를 더 정확하게 전해 주세요.</p><div class="surface mt-4"><form method="post" action="{% url 'books:update' book.pk %}">{% csrf_token %}{% include 'includes/form_fields.html' %}<div class="form-actions"><a class="btn btn-outline-secondary" href="{% url 'books:detail' book.pk %}">취소</a><button class="btn btn-primary" type="submit">수정 내용 저장</button></div></form></div></div>
+{% endblock %}

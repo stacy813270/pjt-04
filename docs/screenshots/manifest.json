@@ -1,0 +1,315 @@
+{
+  "captured_at": "2026-10-29T16:13:21+09:00",
+  "browser": "Google Chrome / Playwright",
+  "viewport": "1440 x 1000 (mobile: 390 x 844)",
+  "isolated_database": true,
+  "screenshots": [
+    {
+      "file": "01-index-guest.png",
+      "title": "비로그인 전체 도서 목록",
+      "requirements": [
+        "F401",
+        "F406",
+        "F412"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "02-login.png",
+      "title": "로그인 폼과 잘못된 인증 정보 오류",
+      "requirements": [
+        "F403",
+        "F406"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/login/",
+      "note": ""
+    },
+    {
+      "file": "03-signup.png",
+      "title": "추가 독서 정보와 관심 장르를 입력한 회원가입 폼",
+      "requirements": [
+        "F402",
+        "F403",
+        "F408",
+        "F418"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/signup/",
+      "note": ""
+    },
+    {
+      "file": "04-index-member.png",
+      "title": "회원가입 완료 후 자동 로그인",
+      "requirements": [
+        "F406",
+        "F408"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "05-book-create.png",
+      "title": "도서 네 필드와 카테고리 입력",
+      "requirements": [
+        "F404",
+        "F405",
+        "F413"
+      ],
+      "url": "http://127.0.0.1:8001/books/create/",
+      "note": ""
+    },
+    {
+      "file": "06-book-detail.png",
+      "title": "등록 성공 후 도서 상세",
+      "requirements": [
+        "F413",
+        "F414"
+      ],
+      "url": "http://127.0.0.1:8001/books/8/",
+      "note": ""
+    },
+    {
+      "file": "07-book-update.png",
+      "title": "기존 값이 복원된 도서 수정 폼",
+      "requirements": [
+        "F415"
+      ],
+      "url": "http://127.0.0.1:8001/books/8/update/",
+      "note": ""
+    },
+    {
+      "file": "07b-book-updated.png",
+      "title": "제목과 평점 수정 완료",
+      "requirements": [
+        "F415"
+      ],
+      "url": "http://127.0.0.1:8001/books/8/",
+      "note": ""
+    },
+    {
+      "file": "08-book-delete.png",
+      "title": "도서 삭제 확인 모달",
+      "requirements": [
+        "F416"
+      ],
+      "url": "http://127.0.0.1:8001/books/8/",
+      "note": ""
+    },
+    {
+      "file": "08b-book-deleted.png",
+      "title": "삭제 후 홈페이지와 완료 알림",
+      "requirements": [
+        "F416"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "09-profile.png",
+      "title": "기본 정보와 독서 프로필",
+      "requirements": [
+        "F419"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/profile/capture_reader/",
+      "note": ""
+    },
+    {
+      "file": "10-account-update.png",
+      "title": "수정 폼과 복원된 관심 장르",
+      "requirements": [
+        "F409",
+        "F418"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/update/",
+      "note": ""
+    },
+    {
+      "file": "10b-account-updated.png",
+      "title": "회원정보 저장 후 홈페이지",
+      "requirements": [
+        "F409"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "10c-profile-updated.png",
+      "title": "저장된 이름과 연간 독서량 확인",
+      "requirements": [
+        "F409",
+        "F419"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/profile/capture_reader/",
+      "note": ""
+    },
+    {
+      "file": "11-password.png",
+      "title": "기존 비밀번호와 새 비밀번호 입력",
+      "requirements": [
+        "F411"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/password/",
+      "note": ""
+    },
+    {
+      "file": "11b-password-changed.png",
+      "title": "비밀번호 변경 완료와 로그인 유지",
+      "requirements": [
+        "F411"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "12-logout.png",
+      "title": "로그아웃 후 비로그인 Navbar",
+      "requirements": [
+        "F407"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "02b-login-success.png",
+      "title": "변경된 비밀번호로 로그인 성공",
+      "requirements": [
+        "F406",
+        "F411"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    },
+    {
+      "file": "14-invalid-input.png",
+      "title": "서버 검증으로 범위 밖 평점 거부",
+      "requirements": [
+        "F405",
+        "F413"
+      ],
+      "url": "http://127.0.0.1:8001/books/create/",
+      "note": "브라우저 기본 검증을 생략하여 실제 Django 서버 오류를 확인"
+    },
+    {
+      "file": "15-mobile.png",
+      "title": "모바일 목록과 펼친 메뉴",
+      "requirements": [
+        "F401"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": "390 × 844 뷰포트의 전체 페이지"
+    },
+    {
+      "file": "16-book-like.png",
+      "title": "도서 상세의 개인 좋아요 선택",
+      "requirements": [
+        "추가: 개인 좋아요"
+      ],
+      "url": "http://127.0.0.1:8001/books/7/",
+      "note": ""
+    },
+    {
+      "file": "17-my-liked-books.png",
+      "title": "본인이 좋아요한 도서 목록",
+      "requirements": [
+        "추가: 개인 좋아요"
+      ],
+      "url": "http://127.0.0.1:8001/books/?liked=1",
+      "note": ""
+    },
+    {
+      "file": "22-recommendation-throttle.png",
+      "title": "실제 추천 요청 중 중복 실행 차단",
+      "requirements": [
+        "추가: 추천 쓰로틀"
+      ],
+      "url": "http://127.0.0.1:8001/books/?liked=1",
+      "note": ""
+    },
+    {
+      "file": "21-gpt-recommendations.png",
+      "title": "실제 GMS 추천 응답",
+      "requirements": [
+        "추가: GPT 추천"
+      ],
+      "url": "http://127.0.0.1:8001/books/?liked=1",
+      "note": "좋아요한 1권을 바탕으로 3권을 추천했어요."
+    },
+    {
+      "file": "18-category-list.png",
+      "title": "선택한 카테고리의 도서 목록과 건수",
+      "requirements": [
+        "추가: 카테고리 조회"
+      ],
+      "url": "http://127.0.0.1:8001/books/categories/12/",
+      "note": ""
+    },
+    {
+      "file": "19-category-create.png",
+      "title": "새 카테고리를 입력한 도서 등록 폼",
+      "requirements": [
+        "추가: 카테고리 생성"
+      ],
+      "url": "http://127.0.0.1:8001/books/create/",
+      "note": ""
+    },
+    {
+      "file": "20-interest-categories.png",
+      "title": "복수 관심 카테고리 저장과 목록 링크",
+      "requirements": [
+        "추가: 관심 카테고리"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/profile/capture_reader/",
+      "note": ""
+    },
+    {
+      "file": "23-model-form-verification.png",
+      "title": "모델과 폼 실행 검증",
+      "requirements": [
+        "F401",
+        "F402",
+        "F403",
+        "F404",
+        "F405",
+        "F418"
+      ],
+      "url": "file:///C:/Users/SSAFY/Desktop/pjt/pjt_04/docs/screenshots/23-model-form-verification.html",
+      "note": "서비스 UI가 아닌 실제 실행 검증 보고서"
+    },
+    {
+      "file": "24-url-verification.png",
+      "title": "URL 이름 공간 실행 검증",
+      "requirements": [
+        "NF401"
+      ],
+      "url": "file:///C:/Users/SSAFY/Desktop/pjt/pjt_04/docs/screenshots/24-url-verification.html",
+      "note": "서비스 UI가 아닌 실제 실행 검증 보고서"
+    },
+    {
+      "file": "25-http-method-verification.png",
+      "title": "HTTP 메서드와 CSRF 실행 검증",
+      "requirements": [
+        "NF402"
+      ],
+      "url": "file:///C:/Users/SSAFY/Desktop/pjt/pjt_04/docs/screenshots/25-http-method-verification.html",
+      "note": "서비스 UI가 아닌 실제 실행 검증 보고서"
+    },
+    {
+      "file": "13-account-delete.png",
+      "title": "테스트 회원 탈퇴 확인",
+      "requirements": [
+        "F410"
+      ],
+      "url": "http://127.0.0.1:8001/accounts/profile/capture_reader/",
+      "note": ""
+    },
+    {
+      "file": "13b-account-deleted.png",
+      "title": "회원탈퇴 후 홈페이지와 세션 종료",
+      "requirements": [
+        "F410"
+      ],
+      "url": "http://127.0.0.1:8001/books/",
+      "note": ""
+    }
+  ]
+}

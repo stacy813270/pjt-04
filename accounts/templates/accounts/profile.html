@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ user_profile.username }}님의 프로필{% endblock %}
+{% block content %}
+<div class="profile-page"><a class="back-link" href="{% url 'books:index' %}">← 도서 목록</a><div class="profile-heading mt-4"><span class="avatar" aria-hidden="true">{{ user_profile.username|first|upper }}</span><div><p class="eyebrow mb-2">READER PROFILE</p><h1 class="page-title mb-0">{{ user_profile.username }}님의 책사이</h1></div></div>
+<div class="row g-4 mt-2"><div class="col-md-5"><section class="surface h-100"><h2 class="fs-5 fw-bold mb-4">기본 정보</h2><dl class="profile-list"><dt>아이디</dt><dd>{{ user_profile.username }}</dd><dt>이메일</dt><dd>{{ user_profile.email|default:'미등록' }}</dd><dt>이름</dt><dd>{% if user_profile.last_name or user_profile.first_name %}{{ user_profile.last_name }}{{ user_profile.first_name }}{% else %}미등록{% endif %}</dd><dt>성별</dt><dd>{{ user_profile.get_gender_display|default:'미등록' }}</dd><dt>나이</dt><dd>{% if user_profile.age %}{{ user_profile.age }}세{% else %}미등록{% endif %}</dd></dl></section></div>
+<div class="col-md-7"><section class="surface h-100"><p class="eyebrow">MY READING HABITS</p><h2 class="fs-5 fw-bold mb-4">나의 독서 취향</h2><div class="row g-3 mb-4"><div class="col-6"><div class="reading-stat"><span>주간 평균 독서 시간</span><strong>{{ user_profile.weekly_reading_hours|default_if_none:'—' }} <small>시간</small></strong></div></div><div class="col-6"><div class="reading-stat"><span>연간 독서량</span><strong>{{ user_profile.annual_reading_count|default_if_none:'—' }} <small>권</small></strong></div></div></div><h3 class="fs-6 fw-bold">관심 장르</h3><p class="genre-display mb-0">{{ user_profile.get_interested_genres_display|default:'아직 선택한 장르가 없습니다.' }}</p></section></div></div>
+<section class="surface mt-4" id="interest-categories" aria-labelledby="interest-category-heading">
+  <h2 class="fs-5 fw-bold mb-3" id="interest-category-heading">관심 카테고리</h2>
+  <div class="category-tags mb-3">
+    {% for category in user_profile.interested_categories.all %}<a class="book-category" href="{% url 'books:category' category.pk %}">{{ category.name }} →</a>{% empty %}<p class="small text-secondary mb-0">아직 선택한 관심 카테고리가 없습니다.</p>{% endfor %}
+  </div>
+  {% if request.user == user_profile %}
+    <form method="post" action="{% url 'accounts:update_interested_categories' %}" aria-label="관심 카테고리 설정">
+      {% csrf_token %}
+      {% include 'includes/form_fields.html' with form=interest_form %}
+      <button class="btn btn-primary" type="submit">관심 카테고리 저장</button>
+    </form>
+  {% endif %}
+</section>
+{% if request.user == user_profile %}<div class="profile-actions mt-4"><div class="d-flex flex-wrap gap-2"><a class="btn btn-primary" href="{% url 'accounts:update' %}">회원정보 수정</a><a class="btn btn-outline-primary" href="{% url 'accounts:change_password' %}">비밀번호 변경</a></div><button class="btn btn-link text-secondary small" type="button" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">회원탈퇴</button></div>
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5" id="deleteAccountTitle">책사이를 떠나시겠어요?</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="닫기"></button></div><div class="modal-body">계정과 독서 프로필이 영구적으로 삭제됩니다. 등록한 도서는 공동 책장에 남습니다.</div><div class="modal-footer"><button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">취소</button><form method="post" action="{% url 'accounts:delete' %}">{% csrf_token %}<button class="btn btn-danger" type="submit">회원탈퇴</button></form></div></div></div></div>{% endif %}
+</div>
+{% endblock %}

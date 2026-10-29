@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#175c45">
+  <title>{% block title %}책사이{% endblock %} · 함께 읽는 즐거움</title>
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/book-likes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/categories.css' %}">
+  <link rel="stylesheet" href="{% static 'css/recommendations.css' %}">
+</head>
+<body>
+  <a class="visually-hidden-focusable skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg container py-3" aria-label="주 메뉴">
+      <a class="navbar-brand brand" href="{% url 'books:index' %}"><span class="brand-icon" aria-hidden="true">▤</span> 책사이<span class="brand-caption">BOOK COMMUNITY</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="메뉴 열기"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navigation">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{% url 'books:index' %}">도서 둘러보기</a></li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'books:create' %}">도서 등록</a></li>
+            <li class="nav-item"><a class="nav-link{% if liked_only %} active fw-bold{% endif %}" href="{% url 'books:index' %}?liked=1"{% if liked_only %} aria-current="page"{% endif %}>♥ 내가 좋아요한 책</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' request.user.username %}">내 프로필</a></li>
+            <li class="nav-item"><form action="{% url 'accounts:logout' %}" method="post">{% csrf_token %}<button class="btn btn-outline-secondary btn-sm ms-lg-2" type="submit">로그아웃</button></form></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">로그인</a></li>
+            <li class="nav-item"><a class="btn btn-primary btn-sm ms-lg-2" href="{% url 'accounts:signup' %}">회원가입</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main id="main" class="container page-content">
+    {% for message in messages %}
+      <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="status">
+        {{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="알림 닫기"></button>
+      </div>
+    {% endfor %}
+    <div class="content-layout">
+      <div class="page-body">{% block content %}{% endblock %}</div>
+      {% include 'books/includes/category_sidebar.html' %}
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container d-flex justify-content-between flex-wrap gap-2"><span><strong>책사이</strong> · 책과 사람 사이, 새로운 이야기가 시작되는 곳</span><span>함께 읽는 즐거움</span></div></footer>
+  <script src="{% static 'vendor/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/book-likes.js' %}" defer></script>
+  <script src="{% static 'js/book-recommendations.js' %}" defer></script>
+</body>
+</html>

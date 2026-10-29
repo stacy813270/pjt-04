@@ -1,0 +1,31 @@
+<section class="recommendation-section mb-5" aria-labelledby="recommendation-heading">
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+    <div>
+      <p class="eyebrow mb-2">YOUR NEXT READ</p>
+      <h2 class="section-title" id="recommendation-heading">취향을 이어가는 다음 책</h2>
+      <p class="small text-secondary mb-0">좋아요한 전체 도서를 바탕으로 최대 3권을 추천해 드려요.</p>
+    </div>
+    <form action="{% url 'books:recommendations' %}" method="post" data-recommendation-form data-throttle-seconds="{{ recommendation_throttle_seconds }}">
+      {% csrf_token %}
+      <button class="btn btn-primary" type="submit"{% if not has_liked_books %} disabled{% endif %}>추천받기</button>
+    </form>
+  </div>
+  <p class="recommendation-status mt-3 mb-0" data-recommendation-status role="status" aria-live="polite">{% if not has_liked_books %}좋아요한 책을 먼저 추가해 주세요.{% endif %}</p>
+  <div data-recommendation-results hidden>
+    <p class="reading-note my-4" role="note">{{ recommendation_disclaimer }}</p>
+    <div class="row g-3" data-recommendation-list></div>
+  </div>
+  <noscript><p class="small text-secondary mt-3">도서 추천을 받으려면 JavaScript를 활성화해 주세요.</p></noscript>
+</section>
+<template id="recommendation-card-template">
+  <div class="col-sm-6">
+    <article class="recommendation-card h-100">
+      <span class="book-category" data-recommended-category></span>
+      <h3 class="fs-5 fw-bold" data-recommended-title></h3>
+      <p class="book-author mb-3" data-recommended-author></p>
+      <p class="recommendation-description" data-recommended-description></p>
+      <div class="recommendation-reason"><strong>이 책을 추천하는 이유</strong><p class="mb-0 mt-2" data-recommended-reason></p></div>
+      <a class="detail-link" data-recommended-link hidden>등록된 도서 상세 보기 ↗</a>
+    </article>
+  </div>
+</template>

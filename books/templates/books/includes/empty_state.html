@@ -1,0 +1,8 @@
+<div class="col-12">
+  <div class="empty-state">
+    <span class="empty-icon" aria-hidden="true">{% if liked_only %}♡{% else %}▤{% endif %}</span>
+    <h3>{% if keyword %}검색 결과가 없습니다{% elif liked_only %}아직 좋아요한 책이 없어요{% elif selected_category %}이 카테고리에 등록된 책이 없어요{% else %}첫 번째 책을 기다리고 있어요{% endif %}</h3>
+    <p>{% if keyword %}다른 제목이나 저자로 다시 검색해 보세요.{% elif liked_only %}마음에 드는 책의 하트를 눌러 나만의 책장을 만들어 보세요.{% elif selected_category %}이 카테고리의 첫 번째 도서를 소개해 주세요.{% else %}좋아하는 책 한 권으로 우리의 책장을 채워주세요.{% endif %}</p>
+    {% if liked_only %}<a class="btn btn-primary" href="{{ list_url }}">도서 둘러보기</a>{% elif request.user.is_authenticated %}<a class="btn btn-primary" href="{% url 'books:create' %}">도서 등록하기</a>{% else %}<a class="btn btn-primary" href="{% url 'accounts:login' %}">로그인하고 시작하기</a>{% endif %}
+  </div>
+</div>

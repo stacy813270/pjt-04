@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}{% if selected_category %}{{ selected_category.name }} · {% endif %}{% if liked_only %}내가 좋아요한 책{% else %}도서 둘러보기{% endif %}{% endblock %}
+{% block content %}
+<section class="hero mb-5">
+  <div class="hero-copy">
+    <p class="eyebrow">BETWEEN BOOKS & PEOPLE</p>
+    <h1>다음 이야기를<br>함께 발견해요.</h1>
+    <p class="hero-description">좋아하는 책을 소개하고, 새로운 책을 만나보세요.<br>한 권의 책이 우리를 이어줍니다.</p>
+    {% if request.user.is_authenticated %}<a class="btn btn-primary" href="{% url 'books:create' %}">도서 등록하기 <span aria-hidden="true">↗</span></a>{% else %}<a class="btn btn-primary" href="{% url 'accounts:signup' %}">책사이 시작하기 <span aria-hidden="true">↗</span></a>{% endif %}
+  </div>
+  <div class="hero-art" aria-hidden="true"><div class="art-circle"></div><div class="art-book book-one"><span>새로운<br>시선</span><small>책으로 여는 세계</small></div><div class="art-book book-two"><span>우리의<br>이야기</span></div><div class="art-book book-three"><span>읽는<br>마음</span></div><span class="art-spark">✳</span></div>
+</section>
+{% if liked_only %}{% include 'books/includes/recommendations.html' %}{% endif %}
+<section aria-labelledby="library-title">
+  <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+    <div><p class="eyebrow mb-2">{% if liked_only %}MY FAVORITE BOOKS{% else %}OUR BOOKSHELF{% endif %}</p><h2 class="section-title mb-0" id="library-title">{% if selected_category %}{{ selected_category.name }}{% if liked_only %} · 내가 좋아요한 책{% endif %}{% elif liked_only %}내가 좋아요한 책{% else %}함께 채우는 책장{% endif %} <span class="count" data-book-count>{{ total_count }}</span></h2></div>
+    <form method="get" action="{{ list_url }}" class="search-form d-flex gap-2" role="search">
+      {% if liked_only %}<input type="hidden" name="liked" value="1">{% endif %}
+      <label for="book-search" class="visually-hidden">제목 또는 저자 검색</label>
+      <input type="search" id="book-search" name="q" value="{{ keyword }}" class="form-control" placeholder="제목 또는 저자 검색">
+      <button class="btn btn-outline-primary text-nowrap" type="submit">검색</button>
+    </form>
+  </div>
+  {% if keyword %}<p class="text-secondary mb-4">“{{ keyword }}” 검색 결과 <span data-result-count>{{ books|length }}</span>권 <a class="ms-2" href="{{ list_url }}{% if liked_only %}?liked=1{% endif %}">검색 초기화</a></p>{% endif %}
+  <div class="row g-4" data-book-list{% if liked_only %} data-liked-only{% endif %}>
+    {% for book in books %}
+      <div class="col-sm-6" data-book-card>
+        <article class="book-card h-100">
+          <a href="{% url 'books:detail' book.pk %}" class="book-card-link" aria-label="{{ book.title }} 상세 보기">
+            <div class="book-visual tone-{% cycle 'sage' 'sand' 'blue' 'rose' %}"><div class="cover-spine"></div><span class="cover-label">BOOK COLLECTION / {{ forloop.counter|stringformat:'02d' }}</span><h3>{{ book.title }}</h3><span class="cover-author">{{ book.author }}</span><span class="cover-mark" aria-hidden="true">✳</span></div>
+            <div class="book-card-body"><span class="book-category">{{ book.category.name }}</span><div class="d-flex justify-content-between align-items-start gap-2"><h3 class="book-title">{{ book.title }}</h3><span class="rating"><span aria-hidden="true">★</span> {{ book.customer_review_rank }}</span></div><p class="book-author">{{ book.author }}</p><p class="book-description">{{ book.description|truncatechars:80 }}</p><span class="detail-link">책 자세히 보기 <span aria-hidden="true">↗</span></span></div>
+          </a>
+          {% if request.user.is_authenticated %}{% include 'books/includes/like_button.html' %}{% endif %}
+        </article>
+      </div>
+    {% empty %}
+      {% include 'books/includes/empty_state.html' %}
+    {% endfor %}
+  </div>
+  {% if liked_only %}<template id="liked-empty-template">{% include 'books/includes/empty_state.html' %}</template>{% endif %}
+</section>
+{% endblock %}

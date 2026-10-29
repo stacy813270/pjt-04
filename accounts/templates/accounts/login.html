@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}로그인{% endblock %}
+{% block content %}
+<div class="auth-page"><div class="text-center mb-4"><p class="eyebrow">WELCOME BACK</p><h1 class="page-title">다시 만나 반가워요.</h1><p class="page-description">책과 함께하는 나의 이야기를 이어가세요.</p></div><div class="surface"><form method="post" action="{% url 'accounts:login' %}">{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">{% include 'includes/form_fields.html' %}<button class="btn btn-primary w-100" type="submit">로그인</button></form><p class="text-center small text-secondary mt-4 mb-0">아직 계정이 없으신가요? <a href="{% url 'accounts:signup' %}" class="ms-1">회원가입</a></p></div></div>
+{% endblock %}

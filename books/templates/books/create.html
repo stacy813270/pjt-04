@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}도서 등록{% endblock %}
+{% block content %}
+<div class="form-page"><a class="back-link" href="{% url 'books:index' %}">← 도서 목록</a><p class="eyebrow mt-4">SHARE YOUR BOOK</p><h1 class="page-title">새로운 책을 소개해 주세요.</h1><p class="page-description">여러분의 한 권이 누군가의 다음 이야기가 됩니다.</p><div class="surface mt-4"><form method="post" action="{% url 'books:create' %}">{% csrf_token %}{% include 'includes/form_fields.html' %}<div class="form-actions"><a class="btn btn-outline-secondary" href="{% url 'books:index' %}">취소</a><button class="btn btn-primary" type="submit">도서 등록</button></div></form></div></div>
+{% endblock %}

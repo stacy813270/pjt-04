@@ -1,0 +1,9 @@
+.book-card { display: flex; flex-direction: column; }
+.book-card-link { height: auto; flex: 1; }
+.like-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; }
+.book-card > .like-controls { padding: 0 22px 20px; }
+.like-button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #dce3db; color: #637568; background: #fff; font-size: .82rem; padding: .45rem .8rem; }
+.like-button:hover, .like-button:focus-visible { border-color: #bb7b86; color: #a13e54; background: #fff6f7; }
+.like-button.is-liked { background: #fff0f3; border-color: #e8bdc7; color: #a13e54; }
+.like-button [data-like-icon] { font-size: 1.15rem; line-height: 1; }
+.like-status { color: #738078; font-size: .72rem; }
